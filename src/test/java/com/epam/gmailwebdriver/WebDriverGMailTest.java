@@ -24,14 +24,14 @@ public class WebDriverGMailTest {
     private static final String DRAFT_FOLDER_URL = "https://mail.google.com/mail/#drafts";
     private static final String SENT_FOLDER_URL = "https://mail.google.com/mail/#sent";
     private static final String GMAIL_LINK = "https://gmail.com";
-    private static final String LOGIN_SELECTOR = "input#identifierId.whsOnd.zHQkBf";
-    private static final String LOGIN_NEXT_BUTTON_SELECTOR = "div#identifierNext";
+    private static final String LOGIN_LOCATOR = "input#identifierId.whsOnd.zHQkBf";
+    private static final String LOGIN_NEXT_BUTTON_LOCATOR = "div#identifierNext";
     private static final String LOGIN_USER_NAME = "natallia.khudzinskaya";
-    private static final String LOGIN_PASSWORD_SELECTOR = "password";
-    private static final String PASSWORD_NEXT_BUTTON_SELECTOR = "passwordNext";
+    private static final String LOGIN_PASSWORD_LOCATOR = "password";
+    private static final String PASSWORD_NEXT_BUTTON_LOCATOR = "passwordNext";
     private static final String USER_PASSWORD = "webdriver123";
-    private static final String CREATE_EMAIL_SELECTOR = "//div[@class='T-I J-J5-Ji T-I-KE L3']";
-    private static final String TO_FIELD_SELECTOR = "to";
+    private static final String CREATE_EMAIL_LOCATOR = "//div[@class='T-I J-J5-Ji T-I-KE L3']";
+    private static final String TO_FIELD_LOCATOR = "to";
     private static final String SEND_TO_EMAIL = "natallia_khudzinskaya@epam.com";
     private static final String SUBJECT_FIELD_LOCATOR = "subjectbox";
     private static final String BODY_FIELD_LOCATOR = "//div[@class='Am Al editable LW-avf']";
@@ -86,7 +86,7 @@ public class WebDriverGMailTest {
         WebElement gmailLogin = (new WebDriverWait(driver, 10)).until(new ExpectedCondition<WebElement>() {
             @Nullable
             public WebElement apply(@Nullable WebDriver webDriver) {
-                return webDriver.findElement(By.cssSelector(LOGIN_SELECTOR));
+                return webDriver.findElement(By.cssSelector(LOGIN_LOCATOR));
             }
         });
         Assert.assertTrue(gmailLogin.isDisplayed(), "Login field is not found.");
@@ -94,7 +94,7 @@ public class WebDriverGMailTest {
 
             @Nullable
             public WebElement apply(@Nullable WebDriver webDriver) {
-                return webDriver.findElement(By.cssSelector(LOGIN_NEXT_BUTTON_SELECTOR));
+                return webDriver.findElement(By.cssSelector(LOGIN_NEXT_BUTTON_LOCATOR));
             }
         });
         Assert.assertTrue(gmailLoginNextButton.isDisplayed(), "Next button on login page is not found.");
@@ -107,7 +107,7 @@ public class WebDriverGMailTest {
                 .ignoring(NoSuchElementException.class);
         WebElement gmailPassword = wait.until(new Function<WebDriver, WebElement>() {
             public WebElement apply(WebDriver webDriver) {
-                return webDriver.findElement(By.name(LOGIN_PASSWORD_SELECTOR));
+                return webDriver.findElement(By.name(LOGIN_PASSWORD_LOCATOR));
             }
         });
         Assert.assertTrue(gmailPassword.isDisplayed(), "Password page is not found.");
@@ -119,7 +119,7 @@ public class WebDriverGMailTest {
 
             @Nullable
             public WebElement apply(@Nullable WebDriver webDriver) {
-                return webDriver.findElement(By.id(PASSWORD_NEXT_BUTTON_SELECTOR));
+                return webDriver.findElement(By.id(PASSWORD_NEXT_BUTTON_LOCATOR));
             }
         });
         Assert.assertTrue(gmailPasswordnNextButton.isDisplayed(), "Next button on the password page is not found.");
@@ -131,7 +131,7 @@ public class WebDriverGMailTest {
                 .ignoring(NoSuchElementException.class);
         WebElement createEmail = wait1.until(new Function<WebDriver, WebElement>() {
             public WebElement apply(WebDriver webDriver) {
-                return webDriver.findElement(By.xpath(CREATE_EMAIL_SELECTOR));
+                return webDriver.findElement(By.xpath(CREATE_EMAIL_LOCATOR));
             }
         });
         Assert.assertTrue(createEmail.isDisplayed(), "Login is failed.");
@@ -142,7 +142,7 @@ public class WebDriverGMailTest {
         WebElement toField = (new WebDriverWait(driver, 10)).until(new ExpectedCondition<WebElement>() {
             @Nullable
             public WebElement apply(@Nullable WebDriver webDriver) {
-                return webDriver.findElement(By.name(TO_FIELD_SELECTOR));
+                return webDriver.findElement(By.name(TO_FIELD_LOCATOR));
             }
         });
         Assert.assertTrue(toField.isDisplayed(), "'To' field is not found.");
