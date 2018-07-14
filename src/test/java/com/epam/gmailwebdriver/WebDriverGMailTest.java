@@ -44,6 +44,21 @@ public class WebDriverGMail {
         driver.quit();
     }
 
+    @Test
+    public void testGmailOperations() {
+
+        driver.get("https://gmail.com");
+        WebElement gmailPassword = testEnterEmail();
+        WebElement createEmail = testPasswordEnter(gmailPassword);
+        testCreateEmail(createEmail);
+        testSaveToDraft();
+        testEmailFields();
+        testSendEmail();
+        testDraftEmailWasRemoved();
+        testSentEmailWasAdded();
+        testGmailLogout();
+    }
+
     private WebElement testEnterEmail() {
         WebElement gmailLogin = (new WebDriverWait(driver, 10)).until(new ExpectedCondition<WebElement>() {
             @Nullable
@@ -246,18 +261,5 @@ public class WebDriverGMail {
         Assert.assertTrue(passwordField.isDisplayed(), "User was not logout.");
 
     }
-    @Test
-    public void testGmailOperations() {
 
-        driver.get("https://gmail.com");
-        WebElement gmailPassword = testEnterEmail();
-        WebElement createEmail = testPasswordEnter(gmailPassword);
-        testCreateEmail(createEmail);
-        testSaveToDraft();
-        testEmailFields();
-        testSendEmail();
-        testDraftEmailWasRemoved();
-        testSentEmailWasAdded();
-        testGmailLogout();
-    }
 }
