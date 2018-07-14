@@ -53,7 +53,7 @@ public class WebDriverGMailTest {
 
     @BeforeClass
     public void beforeClass() {
-        System.setProperty("webdriver.chrome.driver", "d:\\_webdriver\\chromedriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options);
