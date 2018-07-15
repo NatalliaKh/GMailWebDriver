@@ -4,15 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import javax.annotation.Nullable;
+import java.util.concurrent.TimeUnit;
 
 public class AbstractPage {
 
     private static final int WAIT_FOR_ELEMENT_TIMEOUT_SECONDS = 10;
+    private static final int POLLING_TIME_SECONDS = 5;
     protected WebDriver driver;
 
     protected AbstractPage(WebDriver driver) {
@@ -35,7 +35,9 @@ public class AbstractPage {
     }
 
     protected void waitForElementInvisible(By locator) {
-        new WebDriverWait(driver, WAIT_FOR_ELEMENT_TIMEOUT_SECONDS)
+        new FluentWait<>(driver)
+                .withTimeout(WAIT_FOR_ELEMENT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .pollingEvery(POLLING_TIME_SECONDS, TimeUnit.SECONDS)
                 .until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 }

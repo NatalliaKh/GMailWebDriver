@@ -30,9 +30,8 @@ public class WebDriverGMailTest {
         System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
-        DesiredCapabilities dc = new DesiredCapabilities();
-        dc.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-        options.merge(dc);
+        options.setAcceptInsecureCerts(true);
+        options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
         driver = new ChromeDriver(options);
     }
 
