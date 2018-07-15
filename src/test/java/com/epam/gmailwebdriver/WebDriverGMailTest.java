@@ -3,6 +3,7 @@ package com.epam.gmailwebdriver;
 import com.epam.gmailwebdriver.pages.DraftEmailPage;
 import com.epam.gmailwebdriver.pages.HomePage;
 import com.epam.gmailwebdriver.pages.LoginPage;
+import com.epam.gmailwebdriver.pages.SentFolderPage;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -100,6 +101,25 @@ public class WebDriverGMailTest {
                 .openDraftFolderPage()
                 .checkDraftEmailWasRemoved(emailSubject)
                 .openProfile()
+                .logout();
+    }
+
+    @Test(dependsOnMethods = "testSendDraftEmailScenario")
+    public void testRemoveAllSentEmailsScenario() {
+        HomePage homePage = new LoginPage(driver)
+                .open()
+                .fillUsername(USER_NAME)
+                .enterUsername()
+                .fillPassword(PASSWORD)
+                .enterPassword();
+        SentFolderPage sentFolderPage = homePage.openSentFolderPage()
+                .chooseAllSentEmails()
+                .removeEmails()
+                .confirmRemoveEmails();
+
+        Assert.assertTrue(sentFolderPage.getEmptyEmailList().isDisplayed(),"Sent email list is not empty.");
+
+        homePage.openProfile()
                 .logout();
     }
 }
