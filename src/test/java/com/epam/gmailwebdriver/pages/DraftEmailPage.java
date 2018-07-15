@@ -24,6 +24,9 @@ public class DraftEmailPage extends HomePage {
     @FindBy(xpath = "//div[@class='T-I J-J5-Ji aoO T-I-atl L3' and @role='button']")
     WebElement sendEmail;
 
+    @FindBy(xpath = "//div[@class='oh J-Z-I J-J5-Ji T-I-ax7' and @role='button']")
+    WebElement removeEmail;
+
     protected DraftEmailPage(WebDriver driver) {
         super(driver);
     }
@@ -70,6 +73,12 @@ public class DraftEmailPage extends HomePage {
     public HomePage sendEmail() {
         waitForElementVisible(sendEmail);
         sendEmail.click();
+        return new HomePage(driver);
+    }
+
+    public HomePage removeEmail() {
+        waitForElementVisible(removeEmail);
+        removeEmail.click();
         return new HomePage(driver);
     }
 }

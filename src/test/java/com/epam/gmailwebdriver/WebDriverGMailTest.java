@@ -10,9 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.UUID;
 
@@ -25,7 +23,7 @@ public class WebDriverGMailTest {
 
     private WebDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void beforeClass() {
         System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
@@ -35,7 +33,7 @@ public class WebDriverGMailTest {
         driver = new ChromeDriver(options);
     }
 
-    @AfterClass
+    @AfterMethod
     public void afterClass() {
         driver.quit();
     }
@@ -70,6 +68,37 @@ public class WebDriverGMailTest {
                 .checkDraftEmailWasRemoved(emailSubject)
                 .openSentFolderPage()
                 .checkSentEmailWasAdded(emailSubject)
+                .openProfile()
+                .logout();
+    }
+
+    @Test
+    public void testRemoveDraftEmailScenario() {
+        String emailTo = SEND_TO_EMAIL;
+        String emailSubject = UUID.randomUUID().toString();
+        String emailBody = EMAIL_BODY;
+
+        HomePage homePage = new LoginPage(driver)
+                .open()
+                .fillUsername(USER_NAME)
+                .enterUsername()
+                .fillPassword(PASSWORD)
+                .enterPassword();
+        homePage.openNewEmail()
+                .fillEmailReceiver(emailTo)
+                .fillEmailSubject(emailSubject)
+                .fillEmailBody(emailBody)
+                .saveToDraft();
+        DraftEmailPage draftEmailPage = homePage.openDraftFolderPage()
+                .openDraftEmail(emailSubject);
+
+        Assert.assertEquals(draftEmailPage.getEmailReceiverAddress(), emailTo, "Email receiver address is not correct.");
+        Assert.assertEquals(draftEmailPage.getEmailSubject(), emailSubject, "Email subject is not correct.");
+        Assert.assertEquals(draftEmailPage.getEmailBody(), emailBody, "Email body is not correct.");
+
+        draftEmailPage.removeEmail()
+                .openDraftFolderPage()
+                .checkDraftEmailWasRemoved(emailSubject)
                 .openProfile()
                 .logout();
     }
