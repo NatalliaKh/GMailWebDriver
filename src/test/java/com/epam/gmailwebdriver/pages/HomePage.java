@@ -8,17 +8,17 @@ import org.openqa.selenium.support.FindBy;
 public class HomePage extends AbstractPage {
 
     private static final String EMAIL_LIST_LOCATOR_FORMAT = "//span[@class='bog' and text()='%s']";
-    private static final String EMAIL_FOLDER_LOCATOR_FORMAT = "//a[@href='%s' and @target='_top']";
+    private static final String EMAIL_FOLDER_LOCATOR_FORMAT = "//a[@href='%s' and @target='_top']/parent::*/parent::*";
     private static final String DRAFTS_FOLDER_URL = "https://mail.google.com/mail/#drafts";
     private static final String SENT_FOLDER_URL = "https://mail.google.com/mail/#sent";
 
-    @FindBy(xpath = "//div[@class='T-I J-J5-Ji T-I-KE L3']")
+    @FindBy(xpath = "//div[text()='COMPOSE']")
     WebElement openNewEmail;
 
-    @FindBy(xpath = "//a[@class='gb_b gb_db gb_R']")
+    @FindBy(xpath = "//a[contains (@title, 'natallia.khudzinskaya@gmail.com')]")
     WebElement profileButton;
 
-    @FindBy(xpath = "//a[@class='gb_za gb_Zf gb_6f gb_Ke gb_Eb']")
+    @FindBy(xpath = "//a[text()='Sign out']")
     WebElement logoutButton;
 
     private enum EmailFolder {
@@ -53,13 +53,11 @@ public class HomePage extends AbstractPage {
 
     public DraftFolderPage openDraftFolderPage() {
         getFolder(EmailFolder.DRAFTS).click();
-        driver.get(DRAFTS_FOLDER_URL);
         return new DraftFolderPage(driver);
     }
 
     public SentFolderPage openSentFolderPage() {
         getFolder(EmailFolder.SENT).click();
-        driver.get(SENT_FOLDER_URL);
         return new SentFolderPage(driver);
     }
 

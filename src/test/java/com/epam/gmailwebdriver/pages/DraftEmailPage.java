@@ -15,16 +15,16 @@ public class DraftEmailPage extends HomePage {
     @FindBy(name = "subjectbox")
     WebElement emailSubjectField;
 
-    @FindBy(xpath = "//div[@class='Am Al editable LW-avf']")
+    @FindBy(xpath = "//div[@aria-label='Message Body']")
     WebElement emailBodyField;
 
-    @FindBy(xpath = "//img[@class='Ha']")
+    @FindBy(xpath = "//img[@aria-label='Save & Close']")
     WebElement saveToDraft;
 
-    @FindBy(xpath = "//div[@class='T-I J-J5-Ji aoO T-I-atl L3' and @role='button']")
+    @FindBy(xpath = "//div[text()='Send' and @role='button']")
     WebElement sendEmail;
 
-    @FindBy(xpath = "//div[@class='oh J-Z-I J-J5-Ji T-I-ax7' and @role='button']")
+    @FindBy(xpath = "//div[@aria-label='Discard draft' and @role='button']")
     WebElement removeEmail;
 
     protected DraftEmailPage(WebDriver driver) {

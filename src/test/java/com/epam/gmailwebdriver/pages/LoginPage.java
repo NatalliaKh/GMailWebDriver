@@ -8,7 +8,7 @@ public class LoginPage extends AbstractPage {
 
     private static final String GMAIL_LINK = "https://gmail.com";
 
-    @FindBy(css = "input#identifierId.whsOnd.zHQkBf")
+    @FindBy(xpath = "//input[@type='email']")
     WebElement usernameField;
 
     @FindBy(css = "div#identifierNext")
