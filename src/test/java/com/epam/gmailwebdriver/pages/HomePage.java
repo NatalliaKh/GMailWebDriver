@@ -8,9 +8,9 @@ import org.openqa.selenium.support.FindBy;
 public class HomePage extends AbstractPage {
 
     private static final String EMAIL_LIST_LOCATOR_FORMAT = "//span[@class='bog' and text()='%s']";
-    private static final String EMAIL_FOLDER_LOCATOR_FORMAT = "//a[@href='%s' and @target='_top']/parent::*/parent::*";
-    private static final String DRAFTS_FOLDER_URL = "https://mail.google.com/mail/#drafts";
-    private static final String SENT_FOLDER_URL = "https://mail.google.com/mail/#sent";
+    private static final String EMAIL_FOLDER_LOCATOR_FORMAT = "//a[contains(text(),'%s') and @target='_top']/parent::*/parent::*";
+    private static final String DRAFTS_FOLDER = "Drafts";
+    private static final String SENT_FOLDER = "Sent Mail";
 
     @FindBy(xpath = "//div[text()='COMPOSE']")
     WebElement openNewEmail;
@@ -22,8 +22,8 @@ public class HomePage extends AbstractPage {
     WebElement logoutButton;
 
     private enum EmailFolder {
-        SENT(SENT_FOLDER_URL),
-        DRAFTS(DRAFTS_FOLDER_URL);
+        SENT(SENT_FOLDER),
+        DRAFTS(DRAFTS_FOLDER);
 
         private final String url;
 
