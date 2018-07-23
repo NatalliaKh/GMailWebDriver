@@ -15,7 +15,7 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//div[text()='COMPOSE']")
     WebElement openNewEmail;
 
-    @FindBy(xpath = "//a[contains (@title, 'natallia.khudzinskaya@gmail.com')]")
+    @FindBy(xpath = "//a[contains (@title, 'Google Account')]")
     WebElement profileButton;
 
     @FindBy(xpath = "//a[text()='Sign out']")
