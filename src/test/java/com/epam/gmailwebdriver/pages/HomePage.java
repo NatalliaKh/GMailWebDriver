@@ -1,8 +1,10 @@
 package com.epam.gmailwebdriver.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends AbstractPage {
@@ -52,7 +54,7 @@ public class HomePage extends AbstractPage {
     }
 
     public DraftFolderPage openDraftFolderPage() {
-        getFolder(EmailFolder.DRAFTS).click();
+        new Actions(driver).sendKeys("gd").build().perform();
         return new DraftFolderPage(driver);
     }
 

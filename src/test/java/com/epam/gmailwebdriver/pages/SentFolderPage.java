@@ -3,6 +3,7 @@ package com.epam.gmailwebdriver.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class SentFolderPage extends HomePage {
@@ -29,7 +30,7 @@ public class SentFolderPage extends HomePage {
 
     public SentFolderPage chooseAllSentEmails() {
         waitForElementVisible(selectAllCheckbox);
-        selectAllCheckbox.click();
+        new Actions(driver).moveToElement(selectAllCheckbox).click().build().perform();
         return this;
     }
 
