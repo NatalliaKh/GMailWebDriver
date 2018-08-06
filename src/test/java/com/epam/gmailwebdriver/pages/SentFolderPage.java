@@ -30,6 +30,8 @@ public class SentFolderPage extends HomePage {
 
     public SentFolderPage chooseAllSentEmails() {
         waitForElementVisible(selectAllCheckbox);
+        highlightElement(driver, selectAllCheckbox);
+        unHighlightElement(driver, selectAllCheckbox);
         new Actions(driver).moveToElement(selectAllCheckbox).click().build().perform();
         return this;
     }

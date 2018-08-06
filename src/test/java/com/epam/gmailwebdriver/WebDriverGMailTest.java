@@ -8,9 +8,13 @@ import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.UUID;
 
 public class WebDriverGMailTest {
@@ -24,13 +28,19 @@ public class WebDriverGMailTest {
 
     @BeforeMethod
     public void beforeClass() {
-        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
+//        DesiredCapabilities capabilities = DesiredCapabilities.firefox(); // use firefox node
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome(); // use chrome node
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         options.addArguments("--lang=en");
         options.setAcceptInsecureCerts(true);
         options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
-        driver = new ChromeDriver(options);
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        try {
+            driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), capabilities);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     @AfterMethod

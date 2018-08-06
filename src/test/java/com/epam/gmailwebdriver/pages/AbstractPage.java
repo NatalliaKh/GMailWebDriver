@@ -1,9 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
 
@@ -41,5 +38,13 @@ public class AbstractPage {
                 .pollingEvery(POLLING_TIME_SECONDS, TimeUnit.SECONDS)
                 .ignoring(UnhandledAlertException.class)
                 .until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
+    protected void highlightElement(WebDriver driver, WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid red'", element);
+    }
+
+    protected void unHighlightElement(WebDriver driver, WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='0px'", element);
     }
 }

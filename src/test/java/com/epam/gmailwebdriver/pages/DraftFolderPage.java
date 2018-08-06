@@ -11,6 +11,8 @@ public class DraftFolderPage extends HomePage {
 
     public DraftEmailPage openDraftEmail(String subject) {
         WebElement email = waitForElementVisible(getEmailInListLocator(subject));
+        highlightElement(driver, email);
+        unHighlightElement(driver, email);
         email.click();
         return new DraftEmailPage(driver);
     }
