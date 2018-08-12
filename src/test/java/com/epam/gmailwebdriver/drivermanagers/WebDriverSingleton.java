@@ -1,4 +1,4 @@
-package com.epam.gmailwebdriver.utils;
+package com.epam.gmailwebdriver.drivermanagers;
 
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;

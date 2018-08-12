@@ -1,5 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
+import com.epam.gmailwebdriver.bo.Email;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -30,21 +31,13 @@ public class DraftEmailPage extends HomePage {
         super();
     }
 
-    public DraftEmailPage fillEmailReceiver(String receiverAddress) {
+    public DraftEmailPage fillEmail(Email email) {
         waitForElementVisible(emailReceiverField);
-        emailReceiverField.sendKeys(receiverAddress);
-        return this;
-    }
-
-    public DraftEmailPage fillEmailSubject(String subject) {
+        emailReceiverField.sendKeys(email.getReceiver());
         waitForElementVisible(emailSubjectField);
-        emailSubjectField.sendKeys(subject);
-        return this;
-    }
-
-    public DraftEmailPage fillEmailBody(String body) {
+        emailSubjectField.sendKeys(email.getSubject());
         waitForElementVisible(emailBodyField);
-        emailBodyField.sendKeys(body);
+        emailBodyField.sendKeys(email.getBody());
         return this;
     }
 

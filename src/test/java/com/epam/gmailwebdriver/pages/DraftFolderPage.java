@@ -1,5 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
+import com.epam.gmailwebdriver.tools.Highlighter;
 import com.epam.gmailwebdriver.utils.Screenshoter;
 import org.openqa.selenium.WebElement;
 
@@ -11,9 +12,9 @@ public class DraftFolderPage extends HomePage {
 
     public DraftEmailPage openDraftEmail(String subject) {
         WebElement email = waitForElementVisible(getEmailInListLocator(subject));
-        highlightElement(driver, email);
+        Highlighter.highlightElement(driver, email);
         Screenshoter.takeScreenshot();
-        unHighlightElement(driver, email);
+        Highlighter.unHighlightElement(driver, email);
         email.click();
         return new DraftEmailPage();
     }

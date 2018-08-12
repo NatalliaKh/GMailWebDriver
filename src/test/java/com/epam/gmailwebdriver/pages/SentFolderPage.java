@@ -1,5 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
+import com.epam.gmailwebdriver.tools.Highlighter;
 import com.epam.gmailwebdriver.utils.Screenshoter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -30,9 +31,9 @@ public class SentFolderPage extends HomePage {
 
     public SentFolderPage chooseAllSentEmails() {
         waitForElementVisible(selectAllCheckbox);
-        highlightElement(driver, selectAllCheckbox);
+        Highlighter.highlightElement(driver, selectAllCheckbox);
         Screenshoter.takeScreenshot();
-        unHighlightElement(driver, selectAllCheckbox);
+        Highlighter.unHighlightElement(driver, selectAllCheckbox);
         new Actions(driver).moveToElement(selectAllCheckbox).click().build().perform();
         return this;
     }

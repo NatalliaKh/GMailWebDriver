@@ -1,5 +1,6 @@
 package com.epam.gmailwebdriver.utils;
 
+import com.epam.gmailwebdriver.drivermanagers.WebDriverSingleton;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

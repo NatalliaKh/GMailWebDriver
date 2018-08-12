@@ -1,6 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
-import com.epam.gmailwebdriver.utils.WebDriverSingleton;
+import com.epam.gmailwebdriver.drivermanagers.WebDriverSingleton;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
@@ -41,11 +41,4 @@ public class AbstractPage {
                 .until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
-    protected void highlightElement(WebDriver driver, WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid red'", element);
-    }
-
-    protected void unHighlightElement(WebDriver driver, WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='0px'", element);
-    }
 }
