@@ -1,8 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -39,8 +37,8 @@ public class HomePage extends AbstractPage {
         }
     }
 
-    protected HomePage(WebDriver driver) {
-        super(driver);
+    protected HomePage() {
+        super();
     }
 
     protected By getEmailInListLocator(String emailSubject) {
@@ -50,17 +48,17 @@ public class HomePage extends AbstractPage {
     public DraftEmailPage openNewEmail() {
         waitForElementVisible(openNewEmail);
         openNewEmail.click();
-        return new DraftEmailPage(driver);
+        return new DraftEmailPage();
     }
 
     public DraftFolderPage openDraftFolderPage() {
-        new Actions(driver).sendKeys("gd").build().perform();
-        return new DraftFolderPage(driver);
+        new Actions(driver).sendKeys("gd").click().build().perform();
+        return new DraftFolderPage();
     }
 
     public SentFolderPage openSentFolderPage() {
         getFolder(EmailFolder.SENT).click();
-        return new SentFolderPage(driver);
+        return new SentFolderPage();
     }
 
     public HomePage openProfile() {
@@ -72,7 +70,7 @@ public class HomePage extends AbstractPage {
     public LoginPage logout() {
         waitForElementVisible(logoutButton);
         logoutButton.click();
-        return new LoginPage(driver);
+        return new LoginPage();
     }
 
     private WebElement getFolder(EmailFolder folder) {

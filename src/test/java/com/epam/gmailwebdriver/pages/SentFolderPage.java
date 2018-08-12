@@ -1,7 +1,7 @@
 package com.epam.gmailwebdriver.pages;
 
+import com.epam.gmailwebdriver.utils.Screenshoter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -19,8 +19,8 @@ public class SentFolderPage extends HomePage {
     @FindBy(xpath = "//button[@name='ok']")
     WebElement confirmRemoveEmails;
 
-    protected SentFolderPage(WebDriver driver) {
-        super(driver);
+    protected SentFolderPage() {
+        super();
     }
 
     public SentFolderPage checkSentEmailWasAdded(String subject) {
@@ -31,6 +31,7 @@ public class SentFolderPage extends HomePage {
     public SentFolderPage chooseAllSentEmails() {
         waitForElementVisible(selectAllCheckbox);
         highlightElement(driver, selectAllCheckbox);
+        Screenshoter.takeScreenshot();
         unHighlightElement(driver, selectAllCheckbox);
         new Actions(driver).moveToElement(selectAllCheckbox).click().build().perform();
         return this;

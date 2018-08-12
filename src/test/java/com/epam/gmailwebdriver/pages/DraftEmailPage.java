@@ -1,6 +1,5 @@
 package com.epam.gmailwebdriver.pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -27,8 +26,8 @@ public class DraftEmailPage extends HomePage {
     @FindBy(xpath = "//div[@aria-label='Discard draft' and @role='button']")
     WebElement removeEmail;
 
-    protected DraftEmailPage(WebDriver driver) {
-        super(driver);
+    protected DraftEmailPage() {
+        super();
     }
 
     public DraftEmailPage fillEmailReceiver(String receiverAddress) {
@@ -73,12 +72,12 @@ public class DraftEmailPage extends HomePage {
     public HomePage sendEmail() {
         waitForElementVisible(sendEmail);
         sendEmail.click();
-        return new HomePage(driver);
+        return new HomePage();
     }
 
     public HomePage removeEmail() {
         waitForElementVisible(removeEmail);
         removeEmail.click();
-        return new HomePage(driver);
+        return new HomePage();
     }
 }

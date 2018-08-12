@@ -1,6 +1,5 @@
 package com.epam.gmailwebdriver.pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -20,8 +19,8 @@ public class LoginPage extends AbstractPage {
     @FindBy(id = "passwordNext")
     WebElement passwordNextButton;
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
+    public LoginPage() {
+        super();
     }
 
     public LoginPage open() {
@@ -50,6 +49,6 @@ public class LoginPage extends AbstractPage {
     public HomePage enterPassword() {
         waitForElementVisible(passwordNextButton);
         passwordNextButton.click();
-        return new HomePage(driver);
+        return new HomePage();
     }
 }

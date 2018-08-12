@@ -4,6 +4,7 @@ import com.epam.gmailwebdriver.pages.DraftEmailPage;
 import com.epam.gmailwebdriver.pages.HomePage;
 import com.epam.gmailwebdriver.pages.LoginPage;
 import com.epam.gmailwebdriver.pages.SentFolderPage;
+import com.epam.gmailwebdriver.utils.WebDriverSingleton;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,28 +25,13 @@ public class WebDriverGMailTest {
     private static final String SEND_TO_EMAIL = "natallia_khudzinskaya@epam.com";
     private static final String EMAIL_BODY = "Test";
 
-    private WebDriver driver;
-
     @BeforeMethod
     public void beforeClass() {
-//        DesiredCapabilities capabilities = DesiredCapabilities.firefox(); // use firefox node
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome(); // use chrome node
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        options.addArguments("--lang=en");
-        options.setAcceptInsecureCerts(true);
-        options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        try {
-            driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), capabilities);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
     }
 
     @AfterMethod
     public void afterClass() {
-        driver.quit();
+        WebDriverSingleton.kill();
     }
 
     @Test
@@ -55,7 +41,7 @@ public class WebDriverGMailTest {
         String emailSubject = UUID.randomUUID().toString();
         String emailBody = EMAIL_BODY;
 
-        HomePage homePage = new LoginPage(driver)
+        HomePage homePage = new LoginPage()
                 .open()
                 .fillUsername(USER_NAME)
                 .enterUsername()
@@ -88,7 +74,7 @@ public class WebDriverGMailTest {
         String emailSubject = UUID.randomUUID().toString();
         String emailBody = EMAIL_BODY;
 
-        HomePage homePage = new LoginPage(driver)
+        HomePage homePage = new LoginPage()
                 .open()
                 .fillUsername(USER_NAME)
                 .enterUsername()
@@ -115,7 +101,7 @@ public class WebDriverGMailTest {
 
     @Test(dependsOnMethods = "testSendDraftEmailScenario")
     public void testRemoveAllSentEmailsScenario() {
-        HomePage homePage = new LoginPage(driver)
+        HomePage homePage = new LoginPage()
                 .open()
                 .fillUsername(USER_NAME)
                 .enterUsername()

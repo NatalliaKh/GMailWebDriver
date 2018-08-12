@@ -1,5 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
+import com.epam.gmailwebdriver.utils.WebDriverSingleton;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
@@ -13,8 +14,8 @@ public class AbstractPage {
     private static final int POLLING_TIME_SECONDS = 5;
     protected WebDriver driver;
 
-    protected AbstractPage(WebDriver driver) {
-        this.driver = driver;
+    protected AbstractPage() {
+        this.driver = WebDriverSingleton.getWebDriverInstance();
         PageFactory.initElements(driver,this);
     }
 
