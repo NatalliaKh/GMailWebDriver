@@ -1,6 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
-import com.epam.gmailwebdriver.tools.Highlighter;
+import com.epam.gmailwebdriver.utils.Highlighter;
 import com.epam.gmailwebdriver.utils.Screenshoter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

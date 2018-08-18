@@ -1,4 +1,4 @@
-package com.epam.gmailwebdriver.tools;
+package com.epam.gmailwebdriver.utils;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
