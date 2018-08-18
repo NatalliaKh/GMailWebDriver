@@ -7,6 +7,7 @@ import com.epam.gmailwebdriver.pages.HomePage;
 import com.epam.gmailwebdriver.pages.LoginPage;
 import com.epam.gmailwebdriver.pages.SentFolderPage;
 import com.epam.gmailwebdriver.drivermanagers.WebDriverSingleton;
+import com.epam.gmailwebdriver.service.MailService;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -18,6 +19,7 @@ public class WebDriverGMailTest {
     private static final String EMAIL_BODY = "Test";
 
     private User user;
+    private MailService mailService = new MailService();
 
     @BeforeMethod
     public void beforeClass() {
@@ -33,15 +35,8 @@ public class WebDriverGMailTest {
     public void testSendDraftEmailScenario() {
 
         Email email = new Email(SEND_TO_EMAIL, UUID.randomUUID().toString(), EMAIL_BODY);
-        HomePage homePage = new LoginPage()
-                .open()
-                .fillUsername(user.getUserName())
-                .enterUsername()
-                .fillPassword(user.getPassword())
-                .enterPassword();
-        homePage.openNewEmail()
-                .fillEmail(email)
-                .saveToDraft();
+        HomePage homePage = mailService.loginToMail(user);
+        mailService.createDraftEmail(homePage, email);
         DraftEmailPage draftEmailPage = homePage.openDraftFolderPage()
                 .openDraftEmail(email.getSubject());
 
@@ -62,15 +57,8 @@ public class WebDriverGMailTest {
     public void testRemoveDraftEmailScenario() {
 
         Email email = new Email(SEND_TO_EMAIL, UUID.randomUUID().toString(), EMAIL_BODY);
-        HomePage homePage = new LoginPage()
-                .open()
-                .fillUsername(user.getUserName())
-                .enterUsername()
-                .fillPassword(user.getPassword())
-                .enterPassword();
-        homePage.openNewEmail()
-                .fillEmail(email)
-                .saveToDraft();
+        HomePage homePage = mailService.loginToMail(user);
+        mailService.createDraftEmail(homePage, email);
         DraftEmailPage draftEmailPage = homePage.openDraftFolderPage()
                 .openDraftEmail(email.getSubject());
 
@@ -87,12 +75,7 @@ public class WebDriverGMailTest {
 
     @Test(dependsOnMethods = "testSendDraftEmailScenario")
     public void testRemoveAllSentEmailsScenario() {
-        HomePage homePage = new LoginPage()
-                .open()
-                .fillUsername(user.getUserName())
-                .enterUsername()
-                .fillPassword(user.getPassword())
-                .enterPassword();
+        HomePage homePage = mailService.loginToMail(user);
         SentFolderPage sentFolderPage = homePage.openSentFolderPage()
                 .chooseAllSentEmails()
                 .removeEmails()
