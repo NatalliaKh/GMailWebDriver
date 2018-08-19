@@ -8,16 +8,16 @@ public class LoginPage extends AbstractPage {
     private static final String GMAIL_LINK = "https://gmail.com";
 
     @FindBy(xpath = "//input[@type='email']")
-    WebElement usernameField;
+    private WebElement usernameField;
 
     @FindBy(css = "div#identifierNext")
-    WebElement usernameNextButton;
+    private WebElement usernameNextButton;
 
     @FindBy(name = "password")
-    WebElement passwordField;
+    private WebElement passwordField;
 
     @FindBy(id = "passwordNext")
-    WebElement passwordNextButton;
+    private WebElement passwordNextButton;
 
     public LoginPage() {
         super();

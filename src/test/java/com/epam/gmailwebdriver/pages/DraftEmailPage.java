@@ -7,25 +7,25 @@ import org.openqa.selenium.support.FindBy;
 public class DraftEmailPage extends HomePage {
 
     @FindBy(name = "to")
-    WebElement emailReceiverField;
+    private WebElement emailReceiverField;
 
     @FindBy(xpath = "//div[@class='oL aDm az9']/child::span")
-    WebElement emailReceiverAddress;
+    private WebElement emailReceiverAddress;
 
     @FindBy(name = "subjectbox")
-    WebElement emailSubjectField;
+    private WebElement emailSubjectField;
 
     @FindBy(xpath = "//div[@aria-label='Message Body']")
-    WebElement emailBodyField;
+    private WebElement emailBodyField;
 
     @FindBy(xpath = "//img[@aria-label='Save & Close']")
-    WebElement saveToDraft;
+    private WebElement saveToDraft;
 
     @FindBy(xpath = "//div[text()='Send' and @role='button']")
-    WebElement sendEmail;
+    private WebElement sendEmail;
 
     @FindBy(xpath = "//div[@aria-label='Discard draft' and @role='button']")
-    WebElement removeEmail;
+    private WebElement removeEmail;
 
     protected DraftEmailPage() {
         super();

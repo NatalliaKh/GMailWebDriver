@@ -13,13 +13,13 @@ public class HomePage extends AbstractPage {
     private static final String SENT_FOLDER = "Sent Mail";
 
     @FindBy(xpath = "//div[text()='COMPOSE']")
-    WebElement openNewEmail;
+    private WebElement openNewEmail;
 
     @FindBy(xpath = "//a[contains (@title, 'Google Account')]")
-    WebElement profileButton;
+    private WebElement profileButton;
 
     @FindBy(xpath = "//a[text()='Sign out']")
-    WebElement logoutButton;
+    private WebElement logoutButton;
 
     private enum EmailFolder {
         SENT(SENT_FOLDER),
@@ -52,7 +52,7 @@ public class HomePage extends AbstractPage {
     }
 
     public DraftFolderPage openDraftFolderPage() {
-        new Actions(driver).sendKeys("gd").click().build().perform();
+        new Actions(driver).sendKeys("gd").build().perform();
         return new DraftFolderPage();
     }
 
