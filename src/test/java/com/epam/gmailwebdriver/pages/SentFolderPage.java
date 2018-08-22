@@ -11,7 +11,7 @@ public class SentFolderPage extends HomePage {
 
     private static final String EMPTY_EMAIL_LIST_LOCATOR = "//td[@style='text-align:center' and @class='TC']";
 
-    @FindBy(xpath = "//div[@style='margin-right: 0px;']//span[@role='checkbox']")
+    @FindBy(xpath = "//div[@gh='tm']//span[@role='checkbox']")
     private WebElement selectAllCheckbox;
 
     @FindBy(xpath = "//div[@role='button' and @aria-label='Delete']")

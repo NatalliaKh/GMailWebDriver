@@ -7,15 +7,15 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends AbstractPage {
 
-    private static final String EMAIL_LIST_LOCATOR_FORMAT = "//span[@class='bog' and text()='%s']";
+    private static final String EMAIL_LIST_LOCATOR_FORMAT = "//span[@class='bog']/child::span[text()='%s']";
     private static final String EMAIL_FOLDER_LOCATOR_FORMAT = "//a[contains(text(),'%s') and @target='_top']/parent::*/parent::*";
     private static final String DRAFTS_FOLDER = "Drafts";
-    private static final String SENT_FOLDER = "Sent Mail";
+    private static final String SENT_FOLDER = "Sent";
 
-    @FindBy(xpath = "//div[text()='COMPOSE']")
+    @FindBy(xpath = "//div[text()='Compose']")
     private WebElement openNewEmail;
 
-    @FindBy(xpath = "//a[contains (@title, 'Google Account')]")
+    @FindBy(xpath = "//a[contains (@aria-label, 'Google Account')]")
     private WebElement profileButton;
 
     @FindBy(xpath = "//a[text()='Sign out']")
@@ -37,7 +37,7 @@ public class HomePage extends AbstractPage {
         }
     }
 
-    protected HomePage() {
+    public HomePage() {
         super();
     }
 
@@ -52,7 +52,7 @@ public class HomePage extends AbstractPage {
     }
 
     public DraftFolderPage openDraftFolderPage() {
-        new Actions(driver).sendKeys("gd").build().perform();
+        getFolder(EmailFolder.DRAFTS).click();
         return new DraftFolderPage();
     }
 

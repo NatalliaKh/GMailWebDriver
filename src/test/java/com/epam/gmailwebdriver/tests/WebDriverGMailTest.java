@@ -13,77 +13,53 @@ import org.testng.annotations.*;
 
 import java.util.UUID;
 
+import static org.testng.Assert.assertTrue;
+
 public class WebDriverGMailTest {
 
     private static final String SEND_TO_EMAIL = "natallia_khudzinskaya@epam.com";
     private static final String EMAIL_BODY = "Test";
 
     private User user;
-    private MailService mailService = new MailService();
+    private MailService mailService;
+    private Email email;
 
-    @BeforeMethod
+    @BeforeClass
     public void beforeClass() {
         user = new User("natallia.khudzinskaya", "webdriver123");
+        mailService = new MailService();
+        email = new Email(SEND_TO_EMAIL, UUID.randomUUID().toString(), EMAIL_BODY);
     }
 
     @AfterMethod
-    public void afterClass() {
+    public void after() {
         WebDriverSingleton.kill();
     }
 
     @Test
     public void testSendDraftEmailScenario() {
 
-        Email email = new Email(SEND_TO_EMAIL, UUID.randomUUID().toString(), EMAIL_BODY);
-        HomePage homePage = mailService.loginToMail(user);
-        mailService.createDraftEmail(homePage, email);
-        DraftEmailPage draftEmailPage = homePage.openDraftFolderPage()
-                .openDraftEmail(email.getSubject());
-
-        Assert.assertEquals(draftEmailPage.getEmailReceiverAddress(), email.getReceiver(), "Email receiver address is not correct.");
-        Assert.assertEquals(draftEmailPage.getEmailSubject(), email.getSubject(), "Email subject is not correct.");
-        Assert.assertEquals(draftEmailPage.getEmailBody(), email.getBody(), "Email body is not correct.");
-
-        draftEmailPage.sendEmail()
-                .openDraftFolderPage()
-                .checkDraftEmailWasRemoved(email.getSubject())
-                .openSentFolderPage()
-                .checkSentEmailWasAdded(email.getSubject())
-                .openProfile()
-                .logout();
+        mailService.loginToMail(user);
+        mailService.createDraftEmail(email);
+        assertTrue(mailService.checkDraftMailExists(email));
+        assertTrue(mailService.sendEmail(email));
+        mailService.logout();
     }
 
     @Test
     public void testRemoveDraftEmailScenario() {
 
-        Email email = new Email(SEND_TO_EMAIL, UUID.randomUUID().toString(), EMAIL_BODY);
-        HomePage homePage = mailService.loginToMail(user);
-        mailService.createDraftEmail(homePage, email);
-        DraftEmailPage draftEmailPage = homePage.openDraftFolderPage()
-                .openDraftEmail(email.getSubject());
-
-        Assert.assertEquals(draftEmailPage.getEmailReceiverAddress(), email.getReceiver(), "Email receiver address is not correct.");
-        Assert.assertEquals(draftEmailPage.getEmailSubject(), email.getSubject(), "Email subject is not correct.");
-        Assert.assertEquals(draftEmailPage.getEmailBody(), email.getBody(), "Email body is not correct.");
-
-        draftEmailPage.removeEmail()
-                .openDraftFolderPage()
-                .checkDraftEmailWasRemoved(email.getSubject())
-                .openProfile()
-                .logout();
+        mailService.loginToMail(user);
+        mailService.createDraftEmail(email);
+        assertTrue(mailService.checkDraftMailExists(email));
+        assertTrue(mailService.removeEmail(email));
+        mailService.logout();
     }
 
     @Test(dependsOnMethods = "testSendDraftEmailScenario")
     public void testRemoveAllSentEmailsScenario() {
-        HomePage homePage = mailService.loginToMail(user);
-        SentFolderPage sentFolderPage = homePage.openSentFolderPage()
-                .chooseAllSentEmails()
-                .removeEmails()
-                .confirmRemoveEmails();
-
-        Assert.assertTrue(sentFolderPage.getEmptyEmailList().isDisplayed(),"Sent email list is not empty.");
-
-        homePage.openProfile()
-                .logout();
+        mailService.loginToMail(user);
+        assertTrue(mailService.removeEmails());
+        mailService.logout();
     }
 }

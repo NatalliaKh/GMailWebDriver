@@ -27,7 +27,7 @@ public class DraftEmailPage extends HomePage {
     @FindBy(xpath = "//div[@aria-label='Discard draft' and @role='button']")
     private WebElement removeEmail;
 
-    protected DraftEmailPage() {
+    public DraftEmailPage() {
         super();
     }
 
