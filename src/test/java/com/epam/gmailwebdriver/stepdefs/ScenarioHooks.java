@@ -2,8 +2,8 @@ package com.epam.gmailwebdriver.stepdefs;
 
 import com.epam.gmailwebdriver.drivermanagers.WebDriverSingleton;
 import com.epam.gmailwebdriver.service.MailService;
-import cucumber.annotation.After;
-import cucumber.annotation.Before;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 
 public class ScenarioHooks {
 

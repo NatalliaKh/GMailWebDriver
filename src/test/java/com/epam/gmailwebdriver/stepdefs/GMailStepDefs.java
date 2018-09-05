@@ -3,12 +3,12 @@ package com.epam.gmailwebdriver.stepdefs;
 import com.epam.gmailwebdriver.bo.Email;
 import com.epam.gmailwebdriver.bo.User;
 import com.epam.gmailwebdriver.service.MailService;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.runtime.PendingException;
-import cucumber.table.DataTable;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ public class GMailStepDefs {
 
     @Given("^I logged in Gmail with parameters:$")
     public void iLoggedInGmailWithParameters(DataTable dataTable) {
-        Map<String, String> data = dataTable.asMaps().get(0);
+        Map<String, String> data = dataTable.asMaps(String.class, String.class).get(0);
         mailService = new MailService();
         user = new User(data.get("username"), data.get("password"));
         mailService.loginToMail(user);
