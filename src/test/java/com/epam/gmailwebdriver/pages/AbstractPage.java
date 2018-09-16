@@ -1,5 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
+import com.epam.gmailwebdriver.reporting.MyLogger;
 import com.epam.gmailwebdriver.utils.WebDriverSingleton;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
@@ -42,10 +43,12 @@ public class AbstractPage {
     }
 
     protected void highlightElement(WebDriver driver, WebElement element) {
+        MyLogger.debug("Highlight element with tag name: '" + element.getTagName());
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid red'", element);
     }
 
     protected void unHighlightElement(WebDriver driver, WebElement element) {
+        MyLogger.debug("Unhighlight element with tag name: '" + element.getTagName());
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='0px'", element);
     }
 }

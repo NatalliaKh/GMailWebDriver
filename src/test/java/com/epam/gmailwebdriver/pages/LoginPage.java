@@ -1,5 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
+import com.epam.gmailwebdriver.reporting.MyLogger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -30,6 +31,7 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage fillUsername(String username){
         waitForElementVisible(usernameField);
+        MyLogger.info("Fill Username '" + username);
         usernameField.sendKeys(username);
         return this;
     }
@@ -42,6 +44,7 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage fillPassword(String password){
         waitForElementVisible(passwordField);
+        MyLogger.info("Fill Password '" + password);
         passwordField.sendKeys(password);
         return this;
     }

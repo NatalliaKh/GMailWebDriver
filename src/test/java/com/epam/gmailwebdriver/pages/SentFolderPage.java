@@ -1,5 +1,6 @@
 package com.epam.gmailwebdriver.pages;
 
+import com.epam.gmailwebdriver.reporting.MyLogger;
 import com.epam.gmailwebdriver.utils.Screenshoter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,7 @@ public class SentFolderPage extends HomePage {
 
     private static final String EMPTY_EMAIL_LIST_LOCATOR = "//td[@style='text-align:center' and @class='TC']";
 
-    @FindBy(xpath = "//div[@style='margin-right: 0px;']//span[@role='checkbox']")
+    @FindBy(xpath = "//div[@gh='tm']//span[@role='checkbox']")
     WebElement selectAllCheckbox;
 
     @FindBy(xpath = "//div[@role='button' and @aria-label='Delete']")
@@ -39,12 +40,14 @@ public class SentFolderPage extends HomePage {
 
     public SentFolderPage removeEmails() {
         waitForElementVisible(removeEmailsButton);
+        MyLogger.info("Remove Sent Emails");
         removeEmailsButton.click();
         return this;
     }
 
     public SentFolderPage confirmRemoveEmails() {
         waitForElementVisible(confirmRemoveEmails);
+        MyLogger.info("Confirm remove Emails");
         confirmRemoveEmails.click();
         return this;
     }

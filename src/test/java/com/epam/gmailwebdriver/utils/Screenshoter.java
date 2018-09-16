@@ -1,5 +1,6 @@
 package com.epam.gmailwebdriver.utils;
 
+import com.epam.gmailwebdriver.reporting.MyLogger;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -18,9 +19,9 @@ public class Screenshoter {
             String screenshotName = SCREENSHOTS_NAME_TPL + System.nanoTime();
             File copy = new File(screenshotName + ".png");
             FileUtils.copyFile(screenshot, copy);
-            System.out.println("Saved screenshot: " + screenshotName);
+            MyLogger.info("Saved screenshot: " + screenshotName);
         } catch (IOException e) {
-            System.out.println("Failed to make screenshot");
+            MyLogger.warn("Failed to make screenshot");
         }
     }
 }
