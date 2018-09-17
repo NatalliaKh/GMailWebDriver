@@ -17,9 +17,11 @@ public class Screenshoter {
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
             String screenshotName = SCREENSHOTS_NAME_TPL + System.nanoTime();
-            File copy = new File(screenshotName + ".png");
+            String srcPath = screenshotName + ".jpg";
+            File copy = new File(srcPath);
             FileUtils.copyFile(screenshot, copy);
             MyLogger.info("Saved screenshot: " + screenshotName);
+            MyLogger.attach(srcPath, "Screenshot");
         } catch (IOException e) {
             MyLogger.warn("Failed to make screenshot");
         }

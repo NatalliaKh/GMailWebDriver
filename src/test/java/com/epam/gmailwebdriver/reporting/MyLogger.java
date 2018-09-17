@@ -1,10 +1,11 @@
 package com.epam.gmailwebdriver.reporting;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MyLogger {
 
-    public static Logger logger = Logger.getLogger(MyLogger.class);
+    private static final Logger logger = LogManager.getLogger(MyLogger.class);
 
     public static void error(String message) {
         logger.error(message);
@@ -32,5 +33,9 @@ public class MyLogger {
 
     public static void log(String message){
         logger.info(message);
+    }
+
+    public static void attach(String filePath, String message) {
+        logger.info("RP_MESSAGE#FILE#{}#{}", filePath, message);
     }
 }
