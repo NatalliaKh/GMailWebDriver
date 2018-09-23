@@ -31,7 +31,7 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage fillUsername(String username){
         waitForElementVisible(usernameField);
-        MyLogger.info("Fill Username '" + username);
+        MyLogger.info("Fill Username '" + username + "'");
         usernameField.sendKeys(username);
         return this;
     }
@@ -44,7 +44,7 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage fillPassword(String password){
         waitForElementVisible(passwordField);
-        MyLogger.info("Fill Password '" + password);
+        MyLogger.info("Fill Password '******'");
         passwordField.sendKeys(password);
         return this;
     }

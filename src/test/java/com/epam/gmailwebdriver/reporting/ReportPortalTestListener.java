@@ -23,6 +23,6 @@ public class ReportPortalTestListener extends BaseTestNGListener {
     public void onTestFailure(ITestResult testResult) {
         super.onTestFailure(testResult);
 
-        Screenshoter.takeScreenshot();
+        MyLogger.info("Test failed, screenshot can be found here: " + Screenshoter.takeScreenshot());
     }
 }

@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Screenshoter {
     private static final String SCREENSHOTS_NAME_TPL = "screenshots/scr";
 
-    public static void takeScreenshot() {
+    public static String takeScreenshot() {
         WebDriver driver = WebDriverSingleton.getWebDriverInstance();
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
@@ -22,8 +22,10 @@ public class Screenshoter {
             FileUtils.copyFile(screenshot, copy);
             MyLogger.info("Saved screenshot: " + screenshotName);
             MyLogger.attach(srcPath, "Screenshot");
+            return srcPath;
         } catch (IOException e) {
             MyLogger.warn("Failed to make screenshot");
+            return "";
         }
     }
 }

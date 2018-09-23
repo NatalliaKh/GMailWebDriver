@@ -33,21 +33,21 @@ public class DraftEmailPage extends HomePage {
 
     public DraftEmailPage fillEmailReceiver(String receiverAddress) {
         waitForElementVisible(emailReceiverField);
-        MyLogger.info("Fill Email receiver '" + receiverAddress);
+        MyLogger.info("Fill Email receiver '" + receiverAddress + "'");
         emailReceiverField.sendKeys(receiverAddress);
         return this;
     }
 
     public DraftEmailPage fillEmailSubject(String subject) {
         waitForElementVisible(emailSubjectField);
-        MyLogger.info("Fill Email subject '" + subject);
+        MyLogger.info("Fill Email subject '" + subject  + "'");
         emailSubjectField.sendKeys(subject);
         return this;
     }
 
     public DraftEmailPage fillEmailBody(String body) {
         waitForElementVisible(emailBodyField);
-        MyLogger.info("Fill Email body '" + body);
+        MyLogger.info("Fill Email body '" + body + "'");
         emailBodyField.sendKeys(body);
         return this;
     }
